@@ -1,39 +1,23 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import './app.css';
 
-import articleService from './services/articleSevice';
+import { Provider } from 'react-redux';
+import store from './store';
 
-import ArticleList from './components/articleList';
+
+import ArticleList from './components/articleList.connect';
 import ArticlePreview from './components/articlePreview';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      articles: [],
-      totalCount: 0,
-      selected: null
-    };
-  }
-
-  async componentDidMount() {
-    const result = await articleService.loadArticles();
-    this.setState({
-      articles: result.data,
-      totalCount: result.totalCount
-    });
-  }
+class App extends PureComponent {
   render() {
     return (
-      <div className="app">
-        <ArticleList
-          articles={this.state.articles}
-          selectedArticleId={this.state.selected}
-          onArticleSelected={(articleId) => this.setState({selected: articleId})}
-        />
-        <ArticlePreview article={this.state.selected ? this.state.articles.find(a => a.id === this.state.selected) : null} />
-      </div>
+      <Provider store={store}>
+        <div className="app">
+          <ArticleList />
+          <ArticlePreview article={null} />
+        </div>
+      </Provider>
     );
   }
 }
