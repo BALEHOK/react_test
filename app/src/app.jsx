@@ -32,7 +32,7 @@ class App extends Component {
           selectedArticleId={this.state.selected}
           onArticleSelected={(articleId) => this.setState({selected: articleId})}
         />
-        <ArticlePreview articleId={0} />
+        <ArticlePreview article={this.state.selected ? this.state.articles.find(a => a.id === this.state.selected) : null} />
       </div>
     );
   }

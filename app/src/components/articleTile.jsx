@@ -31,7 +31,7 @@ class articleList extends Component {
         onClick={() => p.onSelect(p.article)}
       >
         <div className="article-tile-image">
-          <img src={imageUrl} />
+          <img src={imageUrl} alt={title} />
         </div>
         <div className="article-tile-info">
           <h3>{title}</h3>

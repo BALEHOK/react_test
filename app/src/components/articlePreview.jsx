@@ -4,22 +4,26 @@ import './articlePreview.css';
 
 class articleList extends Component {
   static propTypes = {
-    articleId: PropTypes.number
+    article: PropTypes.object
   }
 
   render() {
-    if (typeof this.props.articleId === 'undefined') {
+    const {article} = this.props;
+
+    if (!article) {
       return (<div className="article-preview"></div>);
     }
 
+    const { title, imageUrl, text } = article;
+
     return (
       <div className="article">
-        <h1>CERN experiment discovers five new particles</h1>
+        <h1>{title}</h1>
         <div className="article-image">
-          <img src="http://www.stfc.ac.uk/stfc/cache/file/4821074D-0D31-4964-9318CA0AE81E0639.jpg" alt="CERN experiment discovers five new particles" />
+          <img src={imageUrl} alt={title} />
         </div>
         <div className="article-body">
-          A new group of particles which have long been hiding in plain sight have finally been discovered thanks to the incredibly sensitive LHCb experiment at CERN. LHCb, otherwise known as the Large Hadron Collider beauty experiment, is one of seven experiments collecting data at the Large Hadron Collider at CERN. UK participation in the experiment is funded by STFC.
+          {text}
         </div>
         <div className="article-comments">
           <h4>Comments</h4>
