@@ -7,7 +7,7 @@ function insertComments(db, articleId, comments, parentCommentId) {
       author,
       parentCommentId,
       articleId,
-    });
+    }).id;
 
     if (replies) {
       insertComments(db, articleId, replies, lastCommentId);

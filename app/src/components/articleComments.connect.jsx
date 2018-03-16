@@ -7,7 +7,7 @@ function mapStateToProps(state) {
   if (state.selectedArticleId === null) {
     return { comments: null };
   }
-console.log(state.comments, state.selectedArticleId)
+
   return { comments: state.comments[state.selectedArticleId] };
 }
 

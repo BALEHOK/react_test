@@ -13,3 +13,9 @@
     max-width: 70%;
     margin-left: 50px;
 }
+
+a {
+    color: #085394;
+    cursor: pointer;
+    text-decoration: underline;
+}

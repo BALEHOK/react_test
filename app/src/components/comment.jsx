@@ -2,10 +2,13 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
+import NestedComment from './comment.connect';
+
 class Comment extends PureComponent {
   static propTypes = {
-    comment: PropTypes.object,
-    loadChildren: PropTypes.func
+    comment: PropTypes.object.isRequired,
+    replies: PropTypes.array,
+    loadReplies: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -16,10 +19,19 @@ class Comment extends PureComponent {
     }
   }
 
-  toggleReply = () => this.setState({showReplyArea: !this.state.showReplyArea})
+  toggleReplyArea = () => this.setState({showReplyArea: !this.state.showReplyArea})
+
+  loadReplies = () => {
+    const {comment, loadReplies} = this.props;
+    if (comment.repliesCount === 0){
+      return;
+    }
+
+    loadReplies(comment);
+  }
 
   render() {
-    const comment = this.props.comment;
+    const {comment, replies} = this.props;
 
     return (
       <div>
@@ -28,10 +40,15 @@ class Comment extends PureComponent {
           <p>{comment.text}</p>
         </div>
         <div>
-          <a onClick={this.props.loadChildren}>{comment.repliesCount} replies</a>
+          <a onClick={this.loadReplies}>{comment.repliesCount} replies</a>
           &nbsp;
-          <a onClick={this.toggleReply}>reply</a>
+          <a onClick={this.toggleReplyArea}>reply</a>
         </div>
+
+        {/* {comment.expanded ? replies.map(r => (
+          <NestedComment comment={r} />
+        )) : null} */}
+
         {this.state.showReplyArea ? (
           <div><textarea cols="30" rows="5"></textarea></div>
         ) : null}

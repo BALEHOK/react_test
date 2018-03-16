@@ -22,3 +22,13 @@ export const commentsLoaded = (data) => ({
   type: actionTypes.commentsLoaded,
   payload: data
 });
+
+export const loadReplies = (comment) => ({
+  type: actionTypes.loadReplies,
+  payload: comment
+});
+
+export const repliesLoaded = (data) => ({
+  type: actionTypes.repliesLoaded,
+  payload: data
+});
