@@ -7,7 +7,7 @@ import store from './store';
 
 
 import ArticleList from './components/articleList.connect';
-import ArticlePreview from './components/articlePreview';
+import ArticlePreview from './components/articlePreview.connect';
 
 class App extends PureComponent {
   render() {
@@ -15,7 +15,7 @@ class App extends PureComponent {
       <Provider store={store}>
         <div className="app">
           <ArticleList />
-          <ArticlePreview article={null} />
+          <ArticlePreview />
         </div>
       </Provider>
     );
