@@ -1,6 +1,6 @@
 .article-tile {
   display: flex;
-  padding: 10px;
+  padding: 10px 25px 10px 10px;
 }
 
 .article-tile.selected {
@@ -8,8 +8,9 @@
 }
 
 .article-tile-image {
-  flex: 0 0 125px;
+  flex: 0 0 30%;
   max-height: 125px;
+  max-width: 30%;
 }
 
 .article-tile-image > img {
@@ -19,7 +20,9 @@
 }
 
 .article-tile-info {
+  flex: 0 0 70%;
   margin-left: 15px;
+  max-width: 70%;
 }
 
 .article-tile-info > h3 {
@@ -31,7 +34,7 @@
 }
 
 .article-tile-info > p {
-  max-height: 3.2em;
+  max-height: 3.4em;
   overflow: hidden;
 }
 
