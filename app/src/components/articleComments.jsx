@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
+import Comment from './comment';
+
 class articleComments extends PureComponent {
   static propTypes = {
     comments: PropTypes.object
@@ -36,13 +38,7 @@ class articleComments extends PureComponent {
           <ul>
             {comments.map(c => (
               <li key={c.id}>
-                <div>
-                  <p>{`${c.author} ${(new Date(c.createdAt)).toLocaleString()}`}</p>
-                  <p>{c.text}</p>
-                </div>
-                <div>
-                  {c.repliesCount} replies
-                </div>
+                <Comment comment={c} />
               </li>
             ))}
           </ul>
