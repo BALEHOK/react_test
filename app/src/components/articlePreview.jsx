@@ -23,7 +23,7 @@ class articleList extends Component {
         </div>
         <div className="article-comments">
           <h4>Comments</h4>
-          <textarea cols="30" rows="5">Body of comment</textarea>
+          <textarea cols="30" rows="5" defaultValue="Body of comment"></textarea>
           <ul>
             <li>
               <div>
@@ -46,7 +46,7 @@ class articleList extends Component {
                     <div>
                       <p>rk 2 hours ago</p>
                       <p>Second reply to second comment</p>
-                      <textarea cols="30" rows="5">Body of reply</textarea>
+                      <textarea cols="30" rows="5" defaultValue="Body of reply"></textarea>
                     </div>
                   </li>
                 </ul>
