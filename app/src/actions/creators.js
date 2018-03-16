@@ -13,3 +13,12 @@ export const articleSelected = (article) => ({
   type: actionTypes.articleSelected,
   payload: article
 });
+
+export const loadComments = () => ({
+  type: actionTypes.loadComments
+});
+
+export const commentsLoaded = (data) => ({
+  type: actionTypes.commentsLoaded,
+  payload: data
+});
