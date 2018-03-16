@@ -1,7 +1,9 @@
-page layout
-load articles
-show article on select
-show comments on select
+set up redux (1h)
+load articles (0.5h)
+show article on select (0.5)
+show comments on select (1h)
+
+fix page layout (1h)
 
 clamp aticle description in a list in a better way
 

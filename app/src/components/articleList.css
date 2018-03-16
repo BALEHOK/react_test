@@ -1,5 +1,5 @@
 .article-list {
-  border: 1px solid black;
+  
 }
 
 .article-list > h2 {
@@ -9,40 +9,4 @@
 .article-list > ul {
   list-style: none;
   padding: 5px;
-}
-
-.article-tile {
-  display: flex;
-  padding: 10px;
-}
-
-.article-tile.selected {
-  background-color: cornsilk;
-}
-
-.article-tile-image > img {
-  height: auto;
-  max-width: 125px;
-}
-
-.article-tile-info {
-  margin-left: 15px;
-}
-
-.article-tile-info > h3 {
-  margin: 0 0 15px;
-  max-width: 99%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.article-tile-info > p {
-  max-height: 3.2em;
-  overflow: hidden;
-}
-
-.article-tile-comments {
-  color: #085394;
-  text-decoration: underline;
 }

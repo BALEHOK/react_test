@@ -4,9 +4,11 @@
 
 .article-list {
     flex: 0 0 30%;
+    /* max-width: 30%; */
 }
 
 .article {
     flex: 0 0 70%;
-    padding-left: 50px;
+    /* max-width: 70%; */
+    margin-left: 50px;
 }
