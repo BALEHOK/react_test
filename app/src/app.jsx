@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import './app.css';
 
 import { Provider } from 'react-redux';
 import store from './store';
-
 
 import ArticleList from './components/articleList.connect';
 import ArticlePreview from './components/articlePreview.connect';

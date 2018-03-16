@@ -13,7 +13,6 @@ function delayedPromise(data) {
 exports.loadArticles = function(paging) {
   const articles = db.find('articles', {}, paging);
   const totalCount = db.count('articles', {});
-
   articles.forEach((article) => {
     article.commentsCount = db.count('comments', { articleId: article.id });
   });

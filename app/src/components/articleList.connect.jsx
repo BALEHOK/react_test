@@ -5,8 +5,8 @@ import { articleSelected, loadArticles } from '../actions/creators';
 
 function mapStateToProps(state) {
   return {
-    articles: state.articles.articles,
-    selectedArticleId: state.articles.selected
+    articles: state.articles,
+    selectedArticleId: state.selectedArticleId
   };
 }
 

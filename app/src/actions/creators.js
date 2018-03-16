@@ -11,5 +11,5 @@ export const articlesLoaded = (data) => ({
 
 export const articleSelected = (article) => ({
   type: actionTypes.articleSelected,
-  payload: article.id
+  payload: article
 });

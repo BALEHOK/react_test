@@ -18,7 +18,7 @@ function insertComments(db, articleId, comments, parentCommentId) {
 module.exports = (db) => {
   for (const article of articles) {
     const { title, text, imageUrl, comments } = article;
-    const lastArticleId = db.insert('articles', { title, text, imageUrl });
+    const lastArticleId = db.insert('articles', { title, text, imageUrl }).id;
 
     if (article.comments) {
       insertComments(db, lastArticleId, comments, null);

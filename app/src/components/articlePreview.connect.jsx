@@ -4,13 +4,13 @@ import Component from './articlePreview';
 import { articleSelected, loadArticles } from '../actions/creators';
 
 function mapStateToProps(state) {
-  const articles = state.articles;
+  const {articles, selectedArticleId} = state;
 
   let selectedArticle;
-  if (articles.selected === null || !articles.articles.length) {
+  if (selectedArticleId === null || !articles.length) {
     selectedArticle = null;
   } else {
-    selectedArticle = articles.articles.find(a => a.id === articles.selected);
+    selectedArticle = articles.find(a => a.id === selectedArticleId);
   }
 
   return {
