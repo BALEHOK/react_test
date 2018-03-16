@@ -7,9 +7,15 @@
   background-color: cornsilk;
 }
 
+.article-tile-image {
+  flex: 0 0 125px;
+  max-height: 125px;
+}
+
 .article-tile-image > img {
   height: auto;
-  max-width: 125px;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .article-tile-info {

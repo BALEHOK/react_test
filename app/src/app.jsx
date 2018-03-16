@@ -12,7 +12,8 @@ class App extends Component {
 
     this.state = {
       articles: [],
-      totalCount: 0
+      totalCount: 0,
+      selected: null
     };
   }
 
@@ -24,11 +25,13 @@ class App extends Component {
     });
   }
   render() {
-    console.log('articles', this.state.articles);
-
     return (
       <div className="app">
-        <ArticleList articles={this.state.articles} />
+        <ArticleList
+          articles={this.state.articles}
+          selectedArticleId={this.state.selected}
+          onArticleSelected={(articleId) => this.setState({selected: articleId})}
+        />
         <ArticlePreview articleId={0} />
       </div>
     );
