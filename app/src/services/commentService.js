@@ -5,8 +5,8 @@ class CommentService {
     return await api.loadComments({articleId});
   }
 
-  async loadRepliesForComment(commentId) {
-    return await api.loadComments({commentId});
+  async loadRepliesForComment(parentCommentId) {
+    return await api.loadComments({parentCommentId});
   }
 }
 

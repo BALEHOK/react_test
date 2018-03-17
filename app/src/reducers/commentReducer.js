@@ -17,7 +17,7 @@ export default function (state = Immutable({}), action) {
         commentsMap[c.id] = c
       });
 
-      return Immutable.merge(state, commentsMap);
+      return state.merge(commentsMap);
 
     default:
       return state;

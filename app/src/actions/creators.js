@@ -1,5 +1,6 @@
 import * as actionTypes from './types';
 
+// articles
 export const loadArticles = () => ({
   type: actionTypes.loadArticles
 });
@@ -14,6 +15,7 @@ export const articleSelected = (article) => ({
   payload: article
 });
 
+// comments
 export const loadComments = () => ({
   type: actionTypes.loadComments
 });
@@ -31,4 +33,9 @@ export const loadReplies = (parentComment) => ({
 export const repliesLoaded = (commentId, comments) => ({
   type: actionTypes.repliesLoaded,
   payload: { commentId, comments }
+});
+
+export const toggleExpandReplies = (commentId) => ({
+  type: actionTypes.toggleExpandReplies,
+  payload: commentId
 });

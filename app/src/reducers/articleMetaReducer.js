@@ -11,7 +11,7 @@ export default function (state = Immutable({}), action) {
         children: comments.map(c => c.id)
       };
 
-      return Immutable.merge(state, {[articleId]: articleMeta});
+      return state.merge({[articleId]: articleMeta});
 
     default:
       return state;
