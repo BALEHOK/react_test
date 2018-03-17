@@ -2,46 +2,30 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
-import Comment from './comment.connect';
+import CommentsByParentList from './commentsListByParent.connect';
 
 class articleComments extends PureComponent {
   static propTypes = {
-    comments: PropTypes.object
-  }
-
-  getCommentsVm() {
-    const {comments} = this.props;
-    if (!comments || !comments.orderedChildren.length) {
-      return [];
-    }
-
-    let vm = [];
-    comments.orderedChildren.forEach(id => vm.push(comments[id]));
-
-    return vm;
+    article: PropTypes.object.isRequired,
+    articleMeta: PropTypes.object.isRequired
   }
 
   render() {
-    const comments = this.getCommentsVm();
+    const p = this.props;
+    const hasComments = p.article.commentsCount !== 0;
 
     return (
       <div className="article-comments">
         <h4>Comments</h4>
 
-        {!comments.length ? (
+        {!hasComments ? (
           <div>Be the first one to comment</div>
         ) : null}
 
         <textarea cols="30" rows="5"></textarea>
 
-        {comments.length ? (
-          <ul>
-            {comments.map(c => (
-              <li key={c.id}>
-                <Comment comment={c} />
-              </li>
-            ))}
-          </ul>
+        {hasComments ? (
+          <CommentsByParentList parentMeta={p.articleMeta} />
         ) : null}
 
       </div>

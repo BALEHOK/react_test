@@ -10,6 +10,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   const commentId = ownProps.comment.id;
+
+  // ToDo think of performance optimizations
   const replies = Object.values(state.comments[articleId]).filter(c => c.parentCommentId === commentId);
 
   return { replies };

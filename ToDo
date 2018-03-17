@@ -1,4 +1,4 @@
-define state and show comments on select (1h)
+preserve comments expand/collapse state on articles change
 
 add comments (1h)
 
@@ -9,6 +9,3 @@ pluralize comment(s) in article list
 add animation
 
 load nice fonts
-
-???
-any action on comment click in article list?

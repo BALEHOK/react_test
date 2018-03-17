@@ -18,17 +18,17 @@ export const loadComments = () => ({
   type: actionTypes.loadComments
 });
 
-export const commentsLoaded = (data) => ({
+export const commentsLoaded = (articleId, comments) => ({
   type: actionTypes.commentsLoaded,
-  payload: data
+  payload: { articleId, comments }
 });
 
-export const loadReplies = (comment) => ({
+export const loadReplies = (parentComment) => ({
   type: actionTypes.loadReplies,
-  payload: comment
+  payload: parentComment
 });
 
-export const repliesLoaded = (data) => ({
+export const repliesLoaded = (commentId, comments) => ({
   type: actionTypes.repliesLoaded,
-  payload: data
+  payload: { commentId, comments }
 });

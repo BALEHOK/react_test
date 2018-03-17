@@ -5,22 +5,19 @@ import * as actionTypes from '../actions/types';
 export default function (state = Immutable({}), action) {
   switch (action.type) {
     case actionTypes.commentsLoaded:
-      const comments = action.payload;
+    case actionTypes.repliesLoaded:
+      const { comments } = action.payload;
       if (!comments.length) {
         return state;
       }
 
-      const articleId = comments[0].articleId;
-      const articleComments = {
-        orderedChildren: [],
-        expanded: false
-      };
+      const commentsMap = {};
+
       comments.forEach(c => {
-        articleComments.orderedChildren.push(c.id);
-        articleComments[c.id] = c;
+        commentsMap[c.id] = c
       });
 
-      return Immutable.merge(state, { [articleId]: articleComments });
+      return Immutable.merge(state, commentsMap);
 
     default:
       return state;

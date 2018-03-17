@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
-import NestedComment from './comment.connect';
-
 class Comment extends PureComponent {
   static propTypes = {
     comment: PropTypes.object.isRequired,

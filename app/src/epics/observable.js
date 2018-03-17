@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import 'rxjs/Observable';
 
 // instance methods
 import 'rxjs/add/operator/filter';

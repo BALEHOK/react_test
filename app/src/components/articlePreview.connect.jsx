@@ -1,7 +1,5 @@
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Component from './articlePreview';
-import { articleSelected, loadArticles } from '../actions/creators';
 
 function mapStateToProps(state) {
   const {articles, selectedArticleId} = state;
@@ -16,13 +14,6 @@ function mapStateToProps(state) {
   return {
     article: selectedArticle
   };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    loadArticles,
-    articleSelected
-  }, dispatch);
 }
 
 export default connect(mapStateToProps)(Component);

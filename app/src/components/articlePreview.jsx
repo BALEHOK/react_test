@@ -27,8 +27,8 @@ class articlePreview extends PureComponent {
         <div className="article-body">
           {text}
         </div>
-        
-        <ArticleComments />
+
+        <ArticleComments article={article} />
       </div>
     );
   }
