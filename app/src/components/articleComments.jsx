@@ -4,7 +4,7 @@ import './articlePreview.css';
 
 import CommentsByParentList from './commentsListByParent.connect';
 
-class articleComments extends PureComponent {
+class ArticleComments extends PureComponent {
   static propTypes = {
     article: PropTypes.object.isRequired,
     articleMeta: PropTypes.object.isRequired
@@ -33,4 +33,4 @@ class articleComments extends PureComponent {
   }
 }
 
-export default articleComments;
+export default ArticleComments;

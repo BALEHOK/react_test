@@ -11,6 +11,7 @@ class CommentsList extends PureComponent {
 
   render() {
     const {comments} = this.props;
+    console.log(`rendering comment list for ${(comments[0] || {}).parentCommentId}`) // понять почему все сломалось - все листы ререндерятся!
 
     return (
       <ul>

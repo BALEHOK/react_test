@@ -19,7 +19,6 @@ const loadRepliesEpic = (action$, store) =>
     .map(action => action.payload)
     .mergeMap(async comment => {
       const result = await commentService.loadRepliesForComment(comment.id);
-      console.log('result', result)
       return actionCreators.repliesLoaded(comment.id, result.data);
     });
 
