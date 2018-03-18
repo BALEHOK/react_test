@@ -22,7 +22,17 @@ const loadRepliesEpic = (action$, store) =>
       return actionCreators.repliesLoaded(comment.id, result.data);
     });
 
+const addCommentEpic = (action$) =>
+  action$.ofType(actionTypes.addComment)
+    .map(action => action.payload)
+    .mergeMap(async ({ articleId, commentId, text }) => {
+      const result = await commentService.addComment(articleId, commentId, text);
+
+      return actionCreators.commentAdded(result.data);
+    })
+
 export default combineEpics(
   loadArticleCommentsEpic,
-  loadRepliesEpic
+  loadRepliesEpic,
+  addCommentEpic,
 );

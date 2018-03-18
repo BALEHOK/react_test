@@ -1,8 +1,10 @@
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Component from './articlePreview';
+import { addComment } from '../actions/creators';
 
 function mapStateToProps(state) {
-  const {articles, selectedArticleId} = state;
+  const { articles, selectedArticleId } = state;
 
   let selectedArticle, articleMeta;
   if (selectedArticleId === null || !articles.length) {
@@ -16,8 +18,17 @@ function mapStateToProps(state) {
 
   return {
     article: selectedArticle,
-    articleMeta
+    articleMeta,
   };
 }
 
-export default connect(mapStateToProps)(Component);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      addComment
+    },
+    dispatch
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

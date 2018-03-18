@@ -11,8 +11,7 @@ export default function (state = Immutable({}), action) {
         return state.setIn([commentId, 'children'], comments.map(c => c.id));
       }
 
-      commentMeta = createMeta();
-      commentMeta.children = comments.map(c => c.id);
+      commentMeta = createMeta(false, comments.map(c => c.id));
 
       return state.merge({ [commentId]: commentMeta });
     }
@@ -24,20 +23,36 @@ export default function (state = Immutable({}), action) {
         return state.setIn([commentId, 'expanded'], !commentMeta.expanded);
       }
 
-      commentMeta = createMeta();
-      commentMeta.expanded = true;
+      commentMeta = createMeta(true);
 
       return state.merge({[commentId]: commentMeta});
     }
+
+    case actionTypes.commentAdded:
+      const {id, parentCommentId} = action.payload;
+      if (typeof parentCommentId === 'undefined') {
+        // this is a comment to an article, disregard
+        return state;
+      }
+
+      let meta = state[parentCommentId];
+      if (!meta) {
+        meta = createMeta(true, [id]);
+      } else {
+        meta = meta.update('children', children => children.concat([id]));
+        meta = meta.merge({expanded: true});
+      }
+
+      return state.merge({[parentCommentId]: meta});
 
     default:
       return state;
   }
 }
 
-function createMeta() {
+function createMeta(expanded = false, children = []) {
   return {
-    expanded: false,
-    children: []
+    expanded,
+    children
   };
 }

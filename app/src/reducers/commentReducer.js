@@ -19,6 +19,10 @@ export default function (state = Immutable({}), action) {
 
       return state.merge(commentsMap);
 
+    case actionTypes.commentAdded:
+      const comment = action.payload;
+      return state.merge({[comment.id]: comment});
+
     default:
       return state;
   }

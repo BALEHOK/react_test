@@ -1,6 +1,5 @@
-preserve comments expand/collapse state on articles change
-
-add comments (1h)
+refactor meta reducers (merge in a single file, reuse some code?)
+refactor reply added reducer to use expanding reducer
 
 clamp aticle description in a list in a better way
 

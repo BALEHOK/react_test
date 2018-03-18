@@ -7,11 +7,12 @@ import ArticleComments from './articleComments';
 class articlePreview extends PureComponent {
   static propTypes = {
     article: PropTypes.object,
-    articleMeta: PropTypes.object
+    articleMeta: PropTypes.object,
+    addComment: PropTypes.func.isRequired,
   }
 
   render() {
-    const {article, articleMeta} = this.props;
+    const { article, articleMeta, addComment } = this.props;
 
     if (!article) {
       return (<div className="article-preview"></div>);
@@ -29,7 +30,7 @@ class articlePreview extends PureComponent {
           {text}
         </div>
 
-        <ArticleComments article={article} articleMeta={articleMeta} />
+        <ArticleComments article={article} articleMeta={articleMeta} addComment={addComment} />
       </div>
     );
   }

@@ -7,10 +7,15 @@ import ReplyForm from './replyForm';
 class ArticleComments extends PureComponent {
   static propTypes = {
     article: PropTypes.object.isRequired,
-    articleMeta: PropTypes.object.isRequired
+    articleMeta: PropTypes.object.isRequired,
+    addComment: PropTypes.func.isRequired,
   }
 
-  addReply = (text) => console.log('will add reply to the article')
+  addReply = (text) => {
+    const {article: { id }, addComment} = this.props;
+
+    addComment(id, null, text);
+  };
 
   render() {
     const p = this.props;

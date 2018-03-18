@@ -38,7 +38,7 @@ class Comment extends PureComponent {
   }
 
   addReply = (text) => {
-    const { comment, toggleExpand } = this.props;
+    const { comment, toggleExpand, addReply } = this.props;
     this.toggleReplyArea();
     addReply(comment.articleId, comment.id, text);
   }
