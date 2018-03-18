@@ -4,16 +4,14 @@ import Component from './articlePreview';
 import { addComment } from '../actions/creators';
 
 function mapStateToProps(state) {
-  const { articles, selectedArticleId } = state;
+  const { articles, articlesMeta, selectedArticleId } = state;
 
   let selectedArticle, articleMeta;
-  if (selectedArticleId === null || !articles.length) {
+  if (selectedArticleId === null) {
     selectedArticle = null;
   } else {
-    selectedArticle = articles.find(a => a.id === selectedArticleId);
-    articleMeta = state.articlesMeta[selectedArticleId] || {
-      children: []
-    };
+    selectedArticle = articles[selectedArticleId];
+    articleMeta = articlesMeta[selectedArticleId];
   }
 
   return {

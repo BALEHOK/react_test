@@ -10,7 +10,6 @@ class CommentsList extends PureComponent {
 
   render() {
     const {commentIds} = this.props;
-
     return (
       <ul>
         {commentIds.map(id => (

@@ -2,15 +2,12 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articleList.css';
 
-import ArticleTile from './articleTile';
+import ArticleTileById from './articleTileById.connect';
 
 class articleList extends PureComponent {
   static propTypes = {
-    articles: PropTypes.array.isRequired,
-    articlesMeta: PropTypes.object.isRequired,
-    selectedArticleId: PropTypes.number,
+    articles: PropTypes.object.isRequired,
     loadArticles: PropTypes.func.isRequired,
-    articleSelected: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -20,14 +17,13 @@ class articleList extends PureComponent {
   }
 
   render() {
-    const { articles, articlesMeta, selectedArticleId } = this.props;
     return (
       <div className="article-list">
         <h2>Article list</h2>
         <ul>
-          {articles.map(a => (
-            <li key={a.id}>
-              <ArticleTile article={a} articleMeta={articlesMeta[a.id]} isSelected={selectedArticleId === a.id} onSelect={this.props.articleSelected} />
+          {Object.keys(this.props.articles).map(id => (
+            <li key={id}>
+              <ArticleTileById articleId={+id}  />
             </li>
           ))}
         </ul>
