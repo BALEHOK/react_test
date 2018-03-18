@@ -18,8 +18,8 @@ class ArticleComments extends PureComponent {
   };
 
   render() {
-    const p = this.props;
-    const hasComments = p.article.commentsCount !== 0;
+    const {articleMeta} = this.props;
+    const hasComments = articleMeta.commentsCount !== 0;
 
     return (
       <div className="article-comments">
@@ -32,7 +32,7 @@ class ArticleComments extends PureComponent {
         <ReplyForm addReply={this.addReply} />
 
         {hasComments ? (
-          <CommentsList commentIds={p.articleMeta.children} />
+          <CommentsList commentIds={articleMeta.children} />
         ) : null}
 
       </div>

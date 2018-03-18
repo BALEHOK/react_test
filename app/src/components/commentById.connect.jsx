@@ -8,9 +8,7 @@ function mapStateToProps(state, ownProps) {
 
   return {
     comment: state.comments[commentId],
-    commentMeta: state.commentsMeta[commentId] || {
-      children: []
-    }
+    commentMeta: state.commentsMeta[commentId]
   };
 }
 

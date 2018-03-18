@@ -20,15 +20,17 @@ export default function (state = Immutable({}), action) {
 
     case actionTypes.commentAdded:
       const { id, parentCommentId } = action.payload;
-      if (typeof parentCommentId !== 'number') {
-        // this is a comment to an article, disregard
-        return state;
+      const metaMap = createCommentsMap(state, [action.payload]);
+
+      if (typeof parentCommentId === 'number') {
+        // this is a reply to other comment
+        const meta = state[parentCommentId];
+        const newMeta = createMeta(meta.commentsCount + 1, meta.children.concat([id]), true);
+
+        metaMap[parentCommentId] = newMeta;
       }
 
-      const meta = state[parentCommentId];
-      const newMeta = createMeta(meta.commentsCount + 1, meta.children.concat([id]), true);
-
-      return state.merge({ [parentCommentId]: newMeta });
+      return state.merge(metaMap);
 
     default:
       return state;
@@ -37,7 +39,7 @@ export default function (state = Immutable({}), action) {
 
 function createCommentsMap(state, comments) {
   const metaMap = {};
-  comments.forEach(comment =>{
+  comments.forEach(comment => {
     const id = comment.id;
     const meta = state[id];
     const children = meta && meta.children || [];
