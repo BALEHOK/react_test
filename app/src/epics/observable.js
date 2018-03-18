@@ -1,5 +1,8 @@
 import 'rxjs/Observable';
 
+// static methods
+import 'rxjs/add/observable/of';
+
 // instance methods
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/ignoreElements';

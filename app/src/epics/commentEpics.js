@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { combineEpics } from 'redux-observable';
 
 import * as actionTypes from '../actions/types';
@@ -9,27 +10,43 @@ const loadArticleCommentsEpic = (action$, store) =>
   action$.ofType(actionTypes.articleSelected)
     .map(action => action.payload)
     .filter(article => article.commentsCount !== 0)
-    .mergeMap(async article => {
-      const result = await commentService.loadCommentsForArticle(article.id);
-      return actionCreators.commentsLoaded(article.id, result.data)
-    });
+    .mergeMap(article => loadArticleComments(article.id));
 
 const loadRepliesEpic = (action$, store) =>
   action$.ofType(actionTypes.loadReplies)
     .map(action => action.payload)
-    .mergeMap(async comment => {
-      const result = await commentService.loadRepliesForComment(comment.id);
-      return actionCreators.repliesLoaded(comment.id, result.data);
-    });
+    .mergeMap(comment => loadCommentReplies(comment.id));
 
 const addCommentEpic = (action$) =>
   action$.ofType(actionTypes.addComment)
     .map(action => action.payload)
-    .mergeMap(async ({ articleId, commentId, text }) => {
-      const result = await commentService.addComment(articleId, commentId, text);
+    .mergeMap(({ articleId, commentId, text }) => {
+      const subject = new Subject();
+      commentService.addComment(articleId, commentId, text)
+        .then(async result => {
+          const newComment = result.data;
+          subject.next(actionCreators.commentAdded(newComment));
 
-      return actionCreators.commentAdded(result.data);
-    })
+          const childrenAction = await (typeof newComment.parentCommentId === 'number'
+            ? loadCommentReplies(newComment.parentCommentId)
+            : loadArticleComments(newComment.articleId));
+
+          subject.next(childrenAction);
+          subject.complete();
+        });
+
+      return subject.asObservable();
+    });
+
+async function loadArticleComments(articleId) {
+  const result = await commentService.loadCommentsForArticle(articleId);
+  return actionCreators.commentsLoaded(articleId, result.data);
+}
+
+async function loadCommentReplies(commentId) {
+  const result = await commentService.loadRepliesForComment(commentId);
+  return actionCreators.repliesLoaded(commentId, result.data);
+}
 
 export default combineEpics(
   loadArticleCommentsEpic,
