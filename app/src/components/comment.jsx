@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
-import CommentsByParentList from './commentsListByParent.connect';
+import CommentsList from './commentsList';
 
 class Comment extends PureComponent {
   static propTypes = {
@@ -28,6 +28,7 @@ class Comment extends PureComponent {
       return;
     }
 
+    // state is going to be toggled, load comments
     if (!commentMeta.expanded) {
       loadReplies(comment);
     }
@@ -51,7 +52,7 @@ class Comment extends PureComponent {
         </div>
 
         {commentMeta.expanded ? (
-          <CommentsByParentList parentMeta={commentMeta} />
+          <CommentsList  commentIds={commentMeta.children} />
         ) : null}
 
         {this.state.showReplyArea ? (

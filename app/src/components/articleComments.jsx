@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
-import CommentsByParentList from './commentsListByParent.connect';
+import CommentsList from './commentsList';
 
 class ArticleComments extends PureComponent {
   static propTypes = {
@@ -25,7 +25,7 @@ class ArticleComments extends PureComponent {
         <textarea cols="30" rows="5"></textarea>
 
         {hasComments ? (
-          <CommentsByParentList parentMeta={p.articleMeta} />
+          <CommentsList commentIds={p.articleMeta.children} />
         ) : null}
 
       </div>

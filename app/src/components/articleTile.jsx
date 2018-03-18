@@ -1,11 +1,11 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './articleTile.css';
 
-class articleList extends Component {
+class articleList extends PureComponent {
   static propTypes = {
     article: PropTypes.object.isRequired,
     isSelected: PropTypes.bool,

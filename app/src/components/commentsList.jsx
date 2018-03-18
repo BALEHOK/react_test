@@ -2,22 +2,21 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './articlePreview.css';
 
-import Comment from './comment.connect';
+import CommentById from './commentById.connect';
 
 class CommentsList extends PureComponent {
   static propTypes = {
-    comments: PropTypes.array.isRequired
+    commentIds: PropTypes.array.isRequired
   }
 
   render() {
-    const {comments} = this.props;
-    console.log(`rendering comment list for ${(comments[0] || {}).parentCommentId}`) // понять почему все сломалось - все листы ререндерятся!
+    const {commentIds} = this.props;
 
     return (
       <ul>
-        {comments.map(c => (
-          <li key={c.id}>
-            <Comment comment={c} />
+        {commentIds.map(id => (
+          <li key={id}>
+            <CommentById commentId={id} />
           </li>
         ))}
       </ul>
