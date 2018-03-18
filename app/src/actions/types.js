@@ -11,3 +11,5 @@ export const commentsLoaded = 'COMMENTS_LOADED';
 export const loadReplies = 'COMMENTS_REPLIES_LOAD';
 export const repliesLoaded = 'COMMENTS_REPLIES_LOADED';
 export const toggleExpandReplies = 'COMMENTS_TOGGLE_EXPAND';
+export const addComment = 'COMMENTS_ADD';
+export const commentAdded = 'COMMENTS_ADDED';

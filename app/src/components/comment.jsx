@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import './articlePreview.css';
 
 import CommentsList from './commentsList';
+import ReplyForm from './replyForm';
 
 class Comment extends PureComponent {
   static propTypes = {
@@ -10,6 +10,7 @@ class Comment extends PureComponent {
     commentMeta: PropTypes.object.isRequired,
     toggleExpand: PropTypes.func.isRequired,
     loadReplies: PropTypes.func.isRequired,
+    addReply: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -36,6 +37,12 @@ class Comment extends PureComponent {
     toggleExpand(comment.id);
   }
 
+  addReply = (text) => {
+    const { comment, toggleExpand } = this.props;
+    this.toggleReplyArea();
+    addReply(comment.articleId, comment.id, text);
+  }
+
   render() {
     const { comment, commentMeta } = this.props;
 
@@ -52,11 +59,11 @@ class Comment extends PureComponent {
         </div>
 
         {commentMeta.expanded ? (
-          <CommentsList  commentIds={commentMeta.children} />
+          <CommentsList commentIds={commentMeta.children} />
         ) : null}
 
         {this.state.showReplyArea ? (
-          <div><textarea cols="30" rows="5"></textarea></div>
+          <ReplyForm addReply={this.addReply} />
         ) : null}
       </div>
     );

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Component from './comment';
-import { loadReplies, toggleExpandReplies } from '../actions/creators';
+import { loadReplies, toggleExpandReplies, addComment } from '../actions/creators';
 
 function mapStateToProps(state, ownProps) {
   const commentId = ownProps.commentId;
@@ -18,7 +18,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       loadReplies,
-      toggleExpand: toggleExpandReplies
+      toggleExpand: toggleExpandReplies,
+      addReply: addComment
     },
     dispatch
   );

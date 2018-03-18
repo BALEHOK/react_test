@@ -39,3 +39,13 @@ export const toggleExpandReplies = (commentId) => ({
   type: actionTypes.toggleExpandReplies,
   payload: commentId
 });
+
+export const addComment = (articleId, commentId, text) => ({
+  type: actionTypes.addComment,
+  payload: { articleId, commentId, text }
+});
+
+export const commentAdded = (comment) => ({
+  type: actionTypes.commentAdded,
+  payload: comment
+});
