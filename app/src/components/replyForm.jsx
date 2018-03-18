@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import './replyForm.css'
 
-class Comment extends PureComponent {
+class ReplyForm extends PureComponent {
   static propTypes = {
     addReply: PropTypes.func.isRequired,
   }
@@ -26,8 +27,8 @@ class Comment extends PureComponent {
     const { text } = this.state;
 
     return (
-      <div>
-        <textarea cols="30" rows="5" value={text} onChange={this.onTextChange}></textarea>
+      <div className="reply-form">
+        <textarea rows="5" value={text} onChange={this.onTextChange} placeholder="comment text"></textarea>
         {text ? (
           <a onClick={this.addReply}>add reply</a>
         ) : null}
@@ -36,4 +37,4 @@ class Comment extends PureComponent {
   }
 }
 
-export default Comment;
+export default ReplyForm;

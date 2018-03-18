@@ -1,0 +1,8 @@
+.reply-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-form > textarea {
+  margin: 10px 0;
+}
