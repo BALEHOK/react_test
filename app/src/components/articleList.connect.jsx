@@ -6,6 +6,7 @@ import { articleSelected, loadArticles } from '../actions/creators';
 function mapStateToProps(state) {
   return {
     articles: state.articles,
+    articlesMeta: state.articlesMeta,
     selectedArticleId: state.selectedArticleId
   };
 }

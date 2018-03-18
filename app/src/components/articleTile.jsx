@@ -8,6 +8,7 @@ import './articleTile.css';
 class articleList extends PureComponent {
   static propTypes = {
     article: PropTypes.object.isRequired,
+    articleMeta: PropTypes.object.isRequired,
     isSelected: PropTypes.bool,
     onSelect: PropTypes.func.isRequired
   }
@@ -24,7 +25,6 @@ class articleList extends PureComponent {
   render() {
     const p = this.props;
     const { title, imageUrl, text, commentsCount } = p.article;
-
     return (
       <div
         className={classNames('article-tile', { selected: p.isSelected })}
@@ -36,7 +36,7 @@ class articleList extends PureComponent {
         <div className="article-tile-info">
           <h3>{title}</h3>
           <p>{text}</p>
-          <span className="article-tile-comments">{commentsCount} comment(s)</span>
+          <span className="article-tile-comments">{p.articleMeta.commentsCount} comment(s)</span>
         </div>
       </div>
     );

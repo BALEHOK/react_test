@@ -4,28 +4,32 @@ import * as actionTypes from '../actions/types';
 
 export default function (state = Immutable({}), action) {
   switch (action.type) {
+    case actionTypes.articlesLoaded:
+      const metaMap = {};
+      action.payload.data.forEach(article => {
+        metaMap[article.id] = createMeta(article.commentsCount)
+      })
+      return state.merge(metaMap);
+
     case actionTypes.commentsLoaded: {
       const { articleId, comments } = action.payload;
-      const articleMeta = createMeta(true, comments.map(c => c.id));
-
-      return state.merge({ [articleId]: articleMeta });
+      return state.setIn([articleId, 'children'], comments.map(c => c.id));
     }
 
     case actionTypes.commentAdded: {
       const { id, parentCommentId, articleId } = action.payload;
+
+      const meta = state[articleId];
+      let children;
       if (typeof parentCommentId === 'number') {
-        // this is a reply to a comment, disregard
-        return state;
-      }
-
-      let meta = state[articleId];
-      if (!meta) {
-        meta = createMeta(true, [id]);
+        children = meta.children;
       } else {
-        meta = meta.update('children', children => children.concat([id]));
+        children = meta.children.concat([id]);
       }
 
-      return state.merge({ [articleId]: meta });
+      const newMeta = createMeta(meta.commentsCount + 1, children);
+
+      return state.merge({ [articleId]: newMeta });
     }
 
     default:
@@ -33,9 +37,10 @@ export default function (state = Immutable({}), action) {
   }
 }
 
-function createMeta(expanded = false, children = []) {
-  return {
-    expanded,
-    children
-  };
+function createMeta(commentsCount, children = []) {
+  return Immutable({
+    expanded: true,
+    children,
+    commentsCount
+  });
 }

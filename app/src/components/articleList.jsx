@@ -7,6 +7,7 @@ import ArticleTile from './articleTile';
 class articleList extends PureComponent {
   static propTypes = {
     articles: PropTypes.array.isRequired,
+    articlesMeta: PropTypes.object.isRequired,
     selectedArticleId: PropTypes.number,
     loadArticles: PropTypes.func.isRequired,
     articleSelected: PropTypes.func.isRequired
@@ -19,14 +20,14 @@ class articleList extends PureComponent {
   }
 
   render() {
-    const { articles, selectedArticleId } = this.props;
+    const { articles, articlesMeta, selectedArticleId } = this.props;
     return (
       <div className="article-list">
         <h2>Article list</h2>
         <ul>
           {articles.map(a => (
             <li key={a.id}>
-              <ArticleTile article={a} isSelected={selectedArticleId === a.id} onSelect={this.props.articleSelected} />
+              <ArticleTile article={a} articleMeta={articlesMeta[a.id]} isSelected={selectedArticleId === a.id} onSelect={this.props.articleSelected} />
             </li>
           ))}
         </ul>
