@@ -25,7 +25,7 @@ class Comment extends PureComponent {
 
   loadReplies = () => {
     const { comment, commentMeta, loadReplies, toggleExpand } = this.props;
-    if (comment.repliesCount === 0) {
+    if (commentMeta.commentsCount === 0) {
       return;
     }
 
@@ -53,7 +53,7 @@ class Comment extends PureComponent {
           <p>{comment.text}</p>
         </div>
         <div>
-          <a onClick={this.loadReplies}>{comment.repliesCount} replies</a>
+          <a onClick={this.loadReplies}>{commentMeta.commentsCount} replies</a>
           &nbsp;
           <a onClick={this.toggleReplyArea}>reply</a>
         </div>

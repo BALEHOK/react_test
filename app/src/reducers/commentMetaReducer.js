@@ -4,55 +4,54 @@ import * as actionTypes from '../actions/types';
 
 export default function (state = Immutable({}), action) {
   switch (action.type) {
+    case actionTypes.commentsLoaded:
+      return state.merge(createCommentsMap(state, action.payload.comments));
+
     case actionTypes.repliesLoaded: {
       const { commentId, comments } = action.payload;
-      let commentMeta = state[commentId];
-      if (commentMeta) {
-        return state.setIn([commentId, 'children'], comments.map(c => c.id));
-      }
-
-      commentMeta = createMeta(false, comments.map(c => c.id));
-
-      return state.merge({ [commentId]: commentMeta });
+      state = state.merge(createCommentsMap(state, comments));
+      return state.setIn([commentId, 'children'], comments.map(c => c.id));
     }
 
     case actionTypes.toggleExpandReplies: {
       const commentId = action.payload;
-      let commentMeta = state[commentId];
-      if (commentMeta) {
-        return state.setIn([commentId, 'expanded'], !commentMeta.expanded);
-      }
-
-      commentMeta = createMeta(true);
-
-      return state.merge({[commentId]: commentMeta});
+      return state.updateIn([commentId, 'expanded'], expanded => !expanded);
     }
 
     case actionTypes.commentAdded:
-      const {id, parentCommentId} = action.payload;
-      if (typeof parentCommentId === 'undefined') {
+      const { id, parentCommentId } = action.payload;
+      if (typeof parentCommentId !== 'number') {
         // this is a comment to an article, disregard
         return state;
       }
 
-      let meta = state[parentCommentId];
-      if (!meta) {
-        meta = createMeta(true, [id]);
-      } else {
-        meta = meta.update('children', children => children.concat([id]));
-        meta = meta.merge({expanded: true});
-      }
+      const meta = state[parentCommentId];
+      const newMeta = createMeta(meta.commentsCount + 1, meta.children.concat([id]), true);
 
-      return state.merge({[parentCommentId]: meta});
+      return state.merge({ [parentCommentId]: newMeta });
 
     default:
       return state;
   }
 }
 
-function createMeta(expanded = false, children = []) {
-  return {
+function createCommentsMap(state, comments) {
+  const metaMap = {};
+  comments.forEach(comment =>{
+    const id = comment.id;
+    const meta = state[id];
+    const children = meta && meta.children || [];
+    const expanded = meta && meta.expanded;
+    metaMap[id] = createMeta(comment.repliesCount, children, expanded)
+  });
+
+  return metaMap;
+}
+
+function createMeta(commentsCount = 0, children = [], expanded = false) {
+  return Immutable({
     expanded,
-    children
-  };
+    children,
+    commentsCount
+  });
 }

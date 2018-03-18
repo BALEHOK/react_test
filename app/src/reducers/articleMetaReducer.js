@@ -6,9 +6,9 @@ export default function (state = Immutable({}), action) {
   switch (action.type) {
     case actionTypes.articlesLoaded:
       const metaMap = {};
-      action.payload.data.forEach(article => {
+      action.payload.data.forEach(article =>
         metaMap[article.id] = createMeta(article.commentsCount)
-      })
+      );
       return state.merge(metaMap);
 
     case actionTypes.commentsLoaded: {
