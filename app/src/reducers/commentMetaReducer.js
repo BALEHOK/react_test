@@ -42,7 +42,7 @@ function createCommentsMap(state, comments) {
   comments.forEach(comment => {
     const id = comment.id;
     const meta = state[id];
-    const children = meta && meta.children || [];
+    const children = (meta && meta.children) || [];
     const expanded = meta && meta.expanded;
     metaMap[id] = createMeta(comment.repliesCount, children, expanded)
   });

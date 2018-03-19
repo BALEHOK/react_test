@@ -24,7 +24,7 @@ class articleList extends PureComponent {
 
   render() {
     const p = this.props;
-    const { title, imageUrl, text, commentsCount } = p.article;
+    const { title, imageUrl, text } = p.article;
     return (
       <div
         className={classNames('article-tile', { selected: p.isSelected })}
